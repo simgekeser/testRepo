@@ -25,7 +25,7 @@ description: 15
         });
     }
 </code></pre>
-
+<p>HUAWEI Identity kit API is used to display the address selection page when your app needs to use the user’s address-related information, such as name, contact, and detailed address.</p>
 
 
 <p><strong>2. Call this function by pressing get address information button in main activity.</strong></p>
@@ -47,8 +47,10 @@ description: 15
         }
     }
 </code></pre>
+<p>4. The address selection page will be displayed by calling the startResolutionForResult method of the status. After making the changes regarding the address, the user can complete the address selection process by clicking the OK button at the bottom of the page.</p>
 
 <p><strong>4. Handle the Response</strong></p>
+<p>If the result code is equal to Activity.RESULT_OK in onActivityResult, the address information will be accessed.</p>
 <pre><div id="copy-button12" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code> protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
             Log.i("TAG", "requestCode=" + requestCode + ", resultCode=" + resultCode);
