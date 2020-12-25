@@ -8,8 +8,6 @@ description: 1
 <div class="token">Huawei Identity Kit</div></div>
 <div class="about-card">
 <h2 class="title">About this codelab</h2>
-<div class="last-updated"><i class="material-icons">subject</i>Last updated Dec 24, 2020</div>
-<div class="authors"><i class="material-icons">account_circle</i>Written by Huawei Codelab Team</div></div>
 </huawei-codelab-about>
 
 <p>
