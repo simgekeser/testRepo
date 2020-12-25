@@ -24,16 +24,14 @@ description: 15
                 Log.i(TAG, "on Failed result code:" + e.getMessage());
             }
         });
-    }
-</code></pre>
+    }</code></pre>
 <p>If result from getuseraddress api is successful, call the startActivityForResult method in onSuccess.Otherwise, an error message is displayed in onFailure.</p>
 <p><strong>2. Call this function by pressing get address information button in main activity.</strong></p>
 <pre><div id="copy-button11" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code> getAddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 identityKitHelper.getUserAddress();
-            }});
-</code></pre>
+            }});</code></pre>
 <p><strong>3. Display address management page.</strong></p>
 <pre><div id="copy-button12" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code> private void startActivityForResult(GetUserAddressResult result) throws IntentSender.SendIntentException {
         Status status = result.getStatus();
@@ -43,8 +41,7 @@ description: 15
         } else {
             Log.i(TAG, "the response is wrong, the return code is " + result.getReturnCode());
         }
-    }
-</code></pre>
+    }</code></pre>
 <p>The address selection page will be displayed by calling the startResolutionForResult method of the status. After making the changes regarding the address, the user can complete the address selection process by clicking the OK button at the bottom of the page.</p>
 <p><strong>4. Handle the Response </strong></p>
 <p>If the result code is equal to Activity.RESULT_OK in onActivityResult, the address information will be accessed.</p>
@@ -73,9 +70,7 @@ description: 15
             } else {
                 Log.d("TAG", "onActivityResult: error");
             }
-    }
-
- </code></pre>
+    } </code></pre>
 <p><strong>5. Full code of Identity kit Helper Class</strong></p>
 <pre><div id="copy-button12" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code> public class IdentityKitHelper{
     private String TAG = "identitykitsuperdemo";
@@ -113,5 +108,4 @@ description: 15
             Log.i(TAG, "the response is wrong, the return code is " + result.getReturnCode());
         }
     }
-}
-</code></pre>
+}</code></pre>
