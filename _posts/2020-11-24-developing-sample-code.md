@@ -52,7 +52,7 @@ getAddress.setOnClickListener(new View.OnClickListener() {
 <span class="pln">
 </span></code></pre>
 <p>The address selection page will be displayed by calling the startResolutionForResult method of the status. After making the changes regarding the address, the user can complete the address selection process by clicking the OK button at the bottom of the page.</p>
-<p><strong>4.Handle the Response </strong></p>
+<p><strong>4. Handle the Response </strong></p>
 <p>If the result code is equal to Activity.RESULT_OK in onActivityResult, the address information will be accessed.</p>
 <pre><div id="copy-button13" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code> 
  @Override
@@ -84,19 +84,15 @@ getAddress.setOnClickListener(new View.OnClickListener() {
 
  <span class="pln">
 </span></code></pre>
-<p><strong>5.Full code of Identity kit Helper Class</strong></p>
+<p><strong>5. Full code of Identity kit Helper Class</strong></p>
 <pre><div id="copy-button12" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code>
-
 public class IdentityKitHelper{
- 
     private String TAG = "identitykitsuperdemo";
     private int GET_ADDRESS = 1000;
     private Activity activity;
-    
     public IdentityKitHelper(Activity activity) {
         this.activity = activity;
     }
-
     public void getUserAddress() {
         UserAddressRequest req = new UserAddressRequest();
         Task<GetUserAddressResult> task = Address.getAddressClient(activity).getUserAddress(req);
@@ -117,7 +113,6 @@ public class IdentityKitHelper{
             }
         });
     }
-
     private void startActivityForResult(GetUserAddressResult result) throws IntentSender.SendIntentException {
         Status status = result.getStatus();
         if (result.getReturnCode() == 0 && status.hasResolution()) {
