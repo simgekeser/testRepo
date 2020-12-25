@@ -47,7 +47,7 @@ description: 15
         }
     }
 </code></pre>
-<p>4. The address selection page will be displayed by calling the startResolutionForResult method of the status. After making the changes regarding the address, the user can complete the address selection process by clicking the OK button at the bottom of the page.</p>
+<p>The address selection page will be displayed by calling the startResolutionForResult method of the status. After making the changes regarding the address, the user can complete the address selection process by clicking the OK button at the bottom of the page.</p>
 
 <p><strong>4. Handle the Response</strong></p>
 <p>If the result code is equal to Activity.RESULT_OK in onActivityResult, the address information will be accessed.</p>
