@@ -2,8 +2,28 @@
 title: Implementing the demo
 description: 15
 ---
-<p><strong>1.Create an instance from HwAssetManager. We will use this instance for all asset operations</strong></p>
-<pre><div id="copy-button10" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code>  private val hwAssetManager = HwAssetManager.getInstance()   
+<p>HUAWEI Identity kit API is used to display the address selection page when your app needs to use the user’s address-related information, such as name, contact, and detailed address.</p>
+<p><strong>1.To get the address information, the first thing is to create a new UserAddressRequest and call the getUserAddress API.</strong></p>
+<pre><div id="copy-button10" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code>  public void getUserAddress() {
+        UserAddressRequest req = new UserAddressRequest();
+        Task task = Address.getAddressClient(activity).getUserAddress(req);
+        task.addOnSuccessListener(new OnSuccessListener() {
+            @Override
+            public void onSuccess(GetUserAddressResult result) {
+                Log.i(TAG, "onSuccess result code:" + result.getReturnCode());
+                try {
+                    startActivityForResult(result);
+                } catch (IntentSender.SendIntentException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(Exception e) {
+                Log.i(TAG, "on Failed result code:" + e.getMessage());
+            }
+        });
+    }
 </code></pre>
 
 
