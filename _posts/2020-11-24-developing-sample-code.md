@@ -4,6 +4,7 @@ description: 15
 ---
 <p>HUAWEI Identity kit API is used to display the address selection page when your app needs to use the user’s address-related information, such as name, contact, and detailed address.</p>
 <p><strong>1.To get the address information, the first thing is to create a new UserAddressRequest and call the getUserAddress API.</strong></p>
+<p>If result from getuseraddress api is successful, call the startActivityForResult method in onSuccess.Otherwise, an error message is displayed in onFailure.</p>
 <pre><div id="copy-button11" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code> public void getUserAddress() {
         UserAddressRequest req = new UserAddressRequest();
         Task<GetUserAddressResult> task = Address.getAddressClient(activity).getUserAddress(req);
@@ -24,7 +25,6 @@ description: 15
             }
         });
     }</code></pre>
-<p>If result from getuseraddress api is successful, call the startActivityForResult method in onSuccess.Otherwise, an error message is displayed in onFailure.</p>
 <p><strong>2. Call this function by pressing get address information button in main activity.</strong></p>
 <pre><div id="copy-button12" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code> getAddress.setOnClickListener(new View.OnClickListener() {
             @Override
