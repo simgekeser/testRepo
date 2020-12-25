@@ -11,5 +11,5 @@ description: 2
 	<li>Login with HuaweiIdAccount</li>
 	<li>Click the My Address Information button</li>
 </ol>
-<img style="width: 220.00px" src="https://raw.githubusercontent.com/simgekeser/testRepo/blob/gh-pages/assets/identitydemo.png" onclick="imageclick(src)">             <img style="width: 217.00px" src="https://raw.githubusercontent.com/simgekeser/testRepo/blob/gh-pages/assets/identityresult.png" onclick="imageclick(src)">
+<img style="width: 220.00px" src="https://raw.githubusercontent.com/simgekeser/testRepo/gh-pages/assets/identitydemo.png" onclick="imageclick(src)">             <img style="width: 220.00px" src="https://raw.githubusercontent.com/simgekeser/testRepo/gh-pages/assets/identityresult.png" onclick="imageclick(src)">
 
