@@ -24,8 +24,8 @@ description: 15
                 Log.i(TAG, "on Failed result code:" + e.getMessage());
             }
         });
-    } 
-<p>If result from getuseraddress api is successful, call the startActivityForResult method in onSuccess.Otherwise, an error message is displayed in onFailure.</p>
+    } </code>
+<p>If result from getuseraddress api is successful, call the startActivityForResult method in onSuccess.Otherwise, an error message is displayed in onFailure.</p></pre>
 <p><strong>2. Call this function by pressing get address information button in main activity.</strong></p>
 <pre><div id="copy-button11" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code> getAddress.setOnClickListener(new View.OnClickListener() {
             @Override
