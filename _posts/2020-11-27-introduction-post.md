@@ -3,12 +3,6 @@ title: "Introduction"
 description: 1
 ---
 
-<huawei-codelab-about codelab-title="Huawei Identity Kit" last-updated="2020-12-09T13:20:13-07:00" authors="Huawei Codelab Team">
-<div class="codelab-title">
-<div class="token">Huawei Identity Kit</div></div>
-<div class="about-card">
-<h2 class="title">About this codelab</h2>
-</huawei-codelab-about>
 
 <p>
 	HUAWEI Identity Kit provides address management services for users, including adding, editing, deleting, and querying addresses, and enables the users to grant the permission for apps to access their addresses through a single tap on the screen.
