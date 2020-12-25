@@ -1,126 +1,86 @@
 ---
-title: Create Wiseplayer and Play Video
+title: Implementing the demo
 description: 15
 ---
 
-<p><strong>1. Locate following line to create the Wise Player Factory instance in WisePlayerInit Object.</strong></p>
-<pre><div id="copy-button10" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code>    //TODO Initializing of Wise Player Factory
+<p>HUAWEI Identity kit API is used to display the address selection page when your app needs to use the user’s address-related information, such as name, contact, and detailed address.</p>
+<p><strong>1.The first thing to get address information is create a new UserAddressRequest and call the getUserAddress API.</strong></p>
+<pre><div id="copy-button10" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code>   
+public void getUserAddress() {
+        UserAddressRequest req = new UserAddressRequest();
+        Task<GetUserAddressResult> task = Address.getAddressClient(activity).getUserAddress(req);
+        task.addOnSuccessListener(new OnSuccessListener<GetUserAddressResult>() {
+            @Override
+            public void onSuccess(GetUserAddressResult result) {
+                Log.i(TAG, "onSuccess result code:" + result.getReturnCode());
+                try {
+                    startActivityForResult(result);
+                } catch (IntentSender.SendIntentException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(Exception e) {
+                Log.i(TAG, "on Failed result code:" + e.getMessage());
+            }
+        });
+    }
 <span class="pln">
 </span></code></pre>
-<p><strong>2. Create the Wise Player Factory instance</strong></p>
-<pre><div id="copy-button11" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code>    val factoryOptions = WisePlayerFactoryOptions.Builder().setDeviceId("xxx").build()
-    // In the multi-process scenario, the onCreate method in Application is called multiple times.
-    // The app needs to call the WisePlayerFactory.initFactory() API in the onCreate method of the app process (named "app package name") 
-    // and WisePlayer process (named "app package name:player").
-    WisePlayerFactory.initFactory(context, factoryOptions, object : InitFactoryCallback {
-        override fun onSuccess(factory: WisePlayerFactory) {
-            wisePlayerFactory = factory
+<p><strong>2. Call this function by pressing get address information button in main activity.</strong></p>
+<pre><div id="copy-button11" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code>   
+getAddress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                identityKitHelper.getUserAddress();
+            }});
+<span class="pln">
+</span></code></pre>
+<p><strong>3.If result from getuseraddress api is successful, call the startActivityForResult method in onSuccess.Otherwise, an error message is displayed in onFailure.</strong></p>
+<pre><div id="copy-button12" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code> 
+ private void startActivityForResult(GetUserAddressResult result) throws IntentSender.SendIntentException {
+        Status status = result.getStatus();
+        if (result.getReturnCode() == 0 && status.hasResolution()) {
+            Log.i(TAG, "the result had resolution.");
+            status.startResolutionForResult(activity, GET_ADDRESS);
+        } else {
+            Log.i(TAG, "the response is wrong, the return code is " + result.getReturnCode());
         }
-        override fun onFailure(errorCode: Int, msg: String) {
-            Log.d("WisePlayerInit", "onFailure: $errorCode - $msg")
-        }
-    })
+    }
 <span class="pln">
 </span></code></pre>
-<p>Description of <strong>Wise Player Factory</strong> is as following:<br></p>
-<table style="width: 100%;table-layout: fixed;">
-	<tbody><tr></tr>
-	<tr><td colspan="1" rowspan="1"><p>Parameter</p>
-	</td><td colspan="1" rowspan="1"><p>Type:</p>
-	</td><td colspan="1" rowspan="1"><p>Mandatory or Not</p>
-	</td><td colspan="1" rowspan="1"><p>Description</p>
-	</td></tr>
-	<tr><td colspan="1" rowspan="1"><p>context</p>
-	</td><td colspan="1" rowspan="1"><p>Context</p>
-	</td><td colspan="1" rowspan="1"><p>M</p>
-	</td><td colspan="1" rowspan="1"><p>Android context object, which is not set to null.</p>
-	</td></tr>
-	<tr><td colspan="1" rowspan="1"><p>options</p>
-	</td><td colspan="1" rowspan="1"><p>Integer</p>
-	</td><td colspan="1" rowspan="1"><p>M</p>
-	</td><td colspan="1" rowspan="1"><p>Instance of the WisePlayer factory class initialization option <a href="https://developer.huawei.com/consumer/en/doc/HMSCore-References-V5/wpf-options-0000001050439397-V5" target="_blank">WisePlayerFactoryOptions</a></p>
-	</td></tr>
-	<tr><td colspan="1" rowspan="1"><p>callback</p>
-	</td><td colspan="1" rowspan="1"><p>Object</p>
-	</td><td colspan="1" rowspan="1"><p>M</p>
-	</td><td colspan="1" rowspan="1"><p>Instance of the <a href="https://developer.huawei.com/consumer/en/doc/HMSCore-References-V5/init-factory-callback-0000001050199187-V5" target="_blank">InitFactoryCallback API</a> for initializing the WisePlayer factory class.</p>
-	</td></tr>
-</tbody></table>
-<p><strong>3. Locate following line and set the EditTexts Urls in MainActivity to play related buttons</strong></p>
-<pre><div id="copy-button12" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code>   // TODO Set video Url or Urls
-<span class="pln">
-</span></code></pre>
-<p><strong>4.Set the EditTexts Urls </strong></p>
-<pre><div id="copy-button13" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code> edtUrl.setText(resources.getString(R.string.single_url))
- edtMultipleUrl.setText(resources.getString(R.string.multiple_url))
+<p>The address selection page will be displayed by calling the startResolutionForResult method of the status. After making the changes regarding the address, the user can complete the address selection process by clicking the OK button at the bottom of the page.</p>
+<p><strong>4.Handle the Response </strong></p>
+<p>If the result code is equal to Activity.RESULT_OK in onActivityResult, the address information will be accessed.</p>
+<pre><div id="copy-button13" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code> 
+ @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+            Log.i("TAG", "requestCode=" + requestCode + ", resultCode=" + resultCode);
+            if (resultCode == Activity.RESULT_OK) {
+                UserAddress userAddress = UserAddress.parseIntent(data);
+                userAddressModel.setName(userAddress.getName());
+                userAddressModel.setPhoneNumber(userAddress.getPhoneNumber());
+                userAddressModel.setEmail(userAddress.getEmailAddress());
+                userAddressModel.setAddress(userAddress.getAddressLine2());
+                userAddressModel.setProvince(userAddress.getAdministrativeArea());
+                userAddressModel.setCity(userAddress.getLocality());
+                userAddressModel.setCountry(userAddress.getCountryCode());
+                userAddressModel.setPostalCode(userAddress.getPostalNumber());
+
+                resultTv.setText("Name : " + userAddressModel.getName()+ '\n'+
+                        "Email : " + userAddressModel.getEmail()+'\n'+
+                        "Phone Number : " +userAddressModel.getPhoneNumber()+'\n'+
+                        "Address : " +userAddressModel.getAddress()+'\n'+
+                        "Province : " +userAddressModel.getProvince()+'\n'+
+                        "City : " + userAddressModel.getCity()+'\n'+
+                        "County : " +userAddressModel.getCountry()+'\n'+
+                        "PostalCode : " +userAddressModel.getPostalCode());
+            } else {
+                Log.d("TAG", "onActivityResult: error");
+            }
+    }
+
  <span class="pln">
-</span></code></pre>
-<p><strong>5. Locate following line and create Wise Player Instance in WisePlayerInit Object. </strong></p>
-<pre><div id="copy-button14" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code>  // TODO Initializing of Wise Player Instance
-<span class="pln">
-</span></code></pre>
-<p><strong>6. Create Wise Player Instance</strong></p>
-<pre><div id="copy-button15" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code>  return wisePlayerFactory.createWisePlayer()
-<span class="pln">
-</span></code></pre>
-<aside class="special">
-	<p><strong>Note: Frame Layout is necessary for SurfaceView to display videos, otherwise only audio will be listened</strong></p>
-</aside>
-<br><img style="width: 400.00px" src="https://raw.githubusercontent.com/bekiryavuzkoc/testRepo/gh-pages/assets/framelayout.PNG" onclick="imageclick(src)">
-<p><strong>7. Locate following line in Play Activity.</strong></p>
-<pre><div id="copy-button17" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code>  //TODO Setting Player, Callback and Seekbar listeners
-<span class="pln">
-</span></code></pre>
-<p><strong>8. Set listeners in Play Activity.</strong></p>
-<pre><div id="copy-button18" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code>  player.setReadyListener(this)
-  player.setReadyListener(this)
-  player.setErrorListener(this)
-  player.setEventListener(this)
-  player.setResolutionUpdatedListener(this)
-  player.setLoadingListener(this)
-  player.setPlayEndListener(this)
-  player.setSeekEndListener(this)
-  surfaceView.holder.addCallback(this)
-  seekBar.setOnSeekBarChangeListener(this)
-  <span class="pln">
-</span></code></pre>
-<p><strong>9. Locate following line in Play Activity.</strong></p>
-<pre><div id="copy-button23" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code>  //TODO Starting the Player
-	<span class="pln">
-</span></code></pre>
-<p><strong>10. Start Wise Player in Play Activity.</strong></p>
-<pre><div id="copy-button24" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code>  player?.start()
-<span class="pln">
-</span></code></pre>
-<p><strong>11. Locate following line in Play Activity. </strong></p>
-<pre><div id="copy-button25" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code>  //TODO Player suspend, resume and surface methods setting
-<span class="pln">
-</span></code></pre>
-<p><strong>12. Set surface change, suspend, view and resume methods to Wise Player.</strong></p>
-<pre><div id="copy-button26" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code>  override fun surfaceChanged(holder: SurfaceHolder, format: Int, width: Int, height: Int) {
-        player.setSurfaceChange()
-    }
-    override fun surfaceDestroyed(holder: SurfaceHolder) {
-        player.suspend()
-    }
-    override fun surfaceCreated(holder: SurfaceHolder) {
-        player.setView(surfaceView)
-        player.resume(PlayerConstants.ResumeType.KEEP)
-    }
-<span class="pln">
-</span></code></pre>
-<p><strong>13. Locate following line in Play Activity.</strong></p>
-<pre><div id="copy-button31" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code>  //TODO Release Wise Player
-<span class="pln">
-</span></code></pre>
-<p><strong>14. Release Wise Player and listeners in Play Activity. </strong></p>
-<pre><div id="copy-button32" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code>  player.setErrorListener(null)
-  player.setEventListener(null)
-  player.setResolutionUpdatedListener(null)
-  player.setReadyListener(null)
-  player.setLoadingListener(null)
-  player.setPlayEndListener(null)
-  player.setSeekEndListener(null)
-  player.release()
-<span class="pln">
 </span></code></pre>
