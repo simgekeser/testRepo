@@ -8,8 +8,8 @@ description: 2
 
 <ol type="1">
 	<li>Open the app upon installing it to your device</li>
-	<li>Fill the Edittext and enter an Url, click the “Play” Button.</li>
-	<li>Wait for video to be displayed.</li>
+	<li>Login with HuaweiIdAccount</li>
+	<li>Click the My Address Information button</li>
 </ol>
-<img style="width: 220.00px" src="https://raw.githubusercontent.com/bekiryavuzkoc/testRepo/gh-pages/assets/videokitone.jpg" onclick="imageclick(src)">             <img style="width: 217.00px" src="https://raw.githubusercontent.com/bekiryavuzkoc/testRepo/gh-pages/assets/playvideoswithvideokittwo.PNG" onclick="imageclick(src)">
+<img style="width: 220.00px" src="https://raw.githubusercontent.com/simgekeser/testRepo/blob/gh-pages/assets/identitydemo.png" onclick="imageclick(src)">             <img style="width: 217.00px" src="https://raw.githubusercontent.com/simgekeser/testRepo/blob/gh-pages/assets/identityresult.png" onclick="imageclick(src)">
 
