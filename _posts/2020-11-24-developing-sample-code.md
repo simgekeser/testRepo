@@ -108,4 +108,4 @@ description: 15
             Log.i(TAG, "the response is wrong, the return code is " + result.getReturnCode());
         }
     }
-}</code></pre>
+}
