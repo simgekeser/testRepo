@@ -3,7 +3,7 @@ title: Set up the Project
 description: 5
 ---
 
-<p>You can download the codelab project from: <a href="https://github.com/huaweicodelabs/VideoKit/tree/master/PlayVideosWithVideoKit" target="_blank">https://github.com/huaweicodelabs/VideoKit/tree/master/PlayVideosWithVideoKit</a></p>
+<p>You can download the codelab project from: <a href="https://github.com/simgekeser/identity-kit-super-demo" target="_blank">https://github.com/simgekeser/identity-kit-super-demo</a></p>
 
 <h2><strong>Creating a Project</strong></h2>
 <p><strong>Step 1</strong>: Start Android Studio.</p>
@@ -42,7 +42,7 @@ description: 5
 <ul>
 	<li>Add a dependency package to the <strong>dependencies</strong> section in the <strong>build.gradle</strong> file.<pre><div id="copy-button4" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code><span class="pln">dependencies </span><span class="pun">{</span><span class="pln">
 		</span><span class="pun">...</span><span class="pln">
-    </span><span class="str">            //Video Kit</span><span class="pln">
+    </span><span class="str">            //Identity Kit</span><span class="pln">
 		implementation </span><span class="str">'com.huawei.hms:identity:4.0.4.300'</span><span class="pln">
 		</span><span class="pun">...</span><span class="pln">
 	</span><span class="pun">}</span><span class="pln">
