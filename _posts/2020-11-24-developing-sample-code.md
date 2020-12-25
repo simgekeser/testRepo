@@ -69,7 +69,6 @@ getAddress.setOnClickListener(new View.OnClickListener() {
                 userAddressModel.setCity(userAddress.getLocality());
                 userAddressModel.setCountry(userAddress.getCountryCode());
                 userAddressModel.setPostalCode(userAddress.getPostalNumber());
-
                 resultTv.setText("Name : " + userAddressModel.getName()+ '\n'+
                         "Email : " + userAddressModel.getEmail()+'\n'+
                         "Phone Number : " +userAddressModel.getPhoneNumber()+'\n'+
@@ -86,12 +85,14 @@ getAddress.setOnClickListener(new View.OnClickListener() {
  <span class="pln">
 </span></code></pre>
 <p><strong>5.Full code of Identity kit Helper Class</strong></p>
-<pre><div id="copy-button12" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code> 
-public class IdentityKitHelper {
+<pre><div id="copy-button12" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code>
+
+public class IdentityKitHelper{
+ 
     private String TAG = "identitykitsuperdemo";
     private int GET_ADDRESS = 1000;
     private Activity activity;
-
+    
     public IdentityKitHelper(Activity activity) {
         this.activity = activity;
     }
